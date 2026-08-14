@@ -23,6 +23,15 @@ tradeez.cn {
 		reverse_proxy api:3000
 	}
 
+	# 曾有一版误将 MSW 的 worker 部署到线上，浏览器可能仍注册着它并拦截 API 请求。
+	# 返回自注销脚本主动清除；若走 SPA 回退返回 index.html，
+	# 浏览器只会注册失败而旧 worker 不会消失。
+	handle /mockServiceWorker.js {
+		header Content-Type "application/javascript"
+		header Cache-Control "no-store"
+		respond `self.addEventListener('install',()=>self.skipWaiting());self.addEventListener('activate',async()=>{await self.registration.unregister();const cs=await self.clients.matchAll({type:'window'});cs.forEach(c=>c.navigate(c.url))});` 200
+	}
+
 	# 前端静态文件。缓存头必须写在 handle 内 ——
 	# handle 是终结性路由，块外的 header 指令进不了这条链路
 	handle {
