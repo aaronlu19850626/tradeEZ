@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+/* 设计令牌：对齐截图配色。深色顶栏/侧栏 + 浅灰页面底 + 白卡 */
+@theme {
+  --color-brand-50: #f3f1ff;
+  --color-brand-100: #ebe5ff;
+  --color-brand-200: #d9ceff;
+  --color-brand-300: #bea6ff;
+  --color-brand-400: #9f75ff;
+  --color-brand-500: #843dff;
+  --color-brand-600: #7916ff;
+  --color-brand-700: #6b04fd;
+
+  /* 顶栏与侧栏的深紫底 */
+  --color-shell-900: #1b1130;
+  --color-shell-800: #241640;
+  --color-shell-700: #2f1d54;
+
+  /* 盈亏语义色，全站统一 */
+  --color-profit: #16a34a;
+  --color-profit-soft: #dcfce7;
+  --color-loss: #dc2626;
+  --color-loss-soft: #fee2e2;
+  --color-flat: #94a3b8;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+  font-family: var(--font-sans);
+}
+
+/* 细滚动条，避免侧栏与表格出现粗滚动条破坏版式 */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme(--color-slate-300) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-300;
+  }
+}
