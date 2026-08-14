@@ -6,12 +6,12 @@ import type {
   AuthUser,
   WechatQrState,
   WechatQrTicket,
-} from '@/types/auth'
+} from '@tradeez/shared'
 import type {
   ForgotPasswordInput,
   LoginInput,
   RegisterInput,
-} from '@/lib/validation'
+} from '@tradeez/shared'
 
 /** 认证接口。F-19 */
 

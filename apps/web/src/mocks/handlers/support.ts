@@ -1,6 +1,6 @@
 import { HttpResponse, http } from 'msw'
 import { lag } from '../latency'
-import type { ChatMessage, ChatSession } from '@/types/auth'
+import type { ChatMessage, ChatSession } from '@tradeez/shared'
 
 /** 在线询问 mock。F-19-07 */
 

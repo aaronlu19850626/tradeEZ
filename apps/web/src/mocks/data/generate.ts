@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import type { Account, DailyStat, Trade, TradeResult } from '@/types'
+import type { Account, DailyStat, Trade, TradeResult } from '@tradeez/shared'
 import { instrumentBySymbol, pickInstrument } from './instruments'
 
 /**

@@ -4,7 +4,7 @@ import { ArrowLeft, MailCheck } from 'lucide-react'
 import { useForgotPassword } from '@/api/auth'
 import { Button } from '@/components/ui/Button'
 import { TextField } from '@/components/ui/TextField'
-import { fieldErrors, forgotPasswordSchema } from '@/lib/validation'
+import { fieldErrors, forgotPasswordSchema } from '@tradeez/shared'
 import { AuthCard } from './AuthLayout'
 
 /** 找回密码：发送重置链接。F-19-04 */

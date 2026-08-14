@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
 import { lag } from '../latency'
-import type { Paged, SummaryMetrics, Trade } from '@/types'
+import type { Paged, SummaryMetrics, Trade } from '@tradeez/shared'
 import { ACCOUNTS, DAILY_STATS, TRADES } from '../data/generate'
 
 /**

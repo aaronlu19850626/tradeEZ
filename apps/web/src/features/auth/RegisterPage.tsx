@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useRegister } from '@/api/auth'
 import { Button } from '@/components/ui/Button'
 import { TextField } from '@/components/ui/TextField'
-import { fieldErrors, registerSchema } from '@/lib/validation'
+import { fieldErrors, registerSchema } from '@tradeez/shared'
 import { AuthCard } from './AuthLayout'
 import { WechatButton } from './WechatButton'
 

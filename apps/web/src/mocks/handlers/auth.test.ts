@@ -1,6 +1,6 @@
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
-import type { AuthSession, WechatQrState, WechatQrTicket } from '@/types/auth'
+import type { AuthSession, WechatQrState, WechatQrTicket } from '@tradeez/shared'
 import { SEED_ACCOUNT } from '../data/users'
 import { authHandlers } from './auth'
 

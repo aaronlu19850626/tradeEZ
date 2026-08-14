@@ -13,6 +13,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.101.4
         version: 5.101.4(react@19.2.8)
+      '@tradeez/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -80,6 +83,22 @@ importers:
       vite:
         specifier: ^8.2.0
         version: 8.2.1(@types/node@24.13.3)(jiti@2.7.0)
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(@types/node@24.13.3)(jsdom@29.1.1)(msw@2.15.0(@types/node@24.13.3)(typescript@6.0.3))(vite@8.2.1(@types/node@24.13.3)(jiti@2.7.0))
+
+  packages/shared:
+    dependencies:
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
+    devDependencies:
+      oxlint:
+        specifier: ^1.75.0
+        version: 1.78.0
+      typescript:
+        specifier: ~6.0.2
+        version: 6.0.3
       vitest:
         specifier: ^4.1.10
         version: 4.1.10(@types/node@24.13.3)(jsdom@29.1.1)(msw@2.15.0(@types/node@24.13.3)(typescript@6.0.3))(vite@8.2.1(@types/node@24.13.3)(jiti@2.7.0))

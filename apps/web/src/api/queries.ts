@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { api } from './client'
 import { filtersToQuery, useFilterStore } from '@/stores/filter-store'
-import type { Account, SummaryMetrics } from '@/types'
+import type { Account, SummaryMetrics } from '@tradeez/shared'
 
 /** 查询键集中管理，避免各处硬编码字符串 */
 export const qk = {

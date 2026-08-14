@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tradeez/shared": "workspace:*",
     "@tanstack/react-query": "^5.101.4",
     "clsx": "^2.1.1",
     "echarts": "^6.1.0",

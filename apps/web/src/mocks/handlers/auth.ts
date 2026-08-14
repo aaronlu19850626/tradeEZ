@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw'
 import { lag } from '../latency'
-import type { AuthSession, WechatQrState, WechatQrTicket } from '@/types/auth'
-import { loginSchema, registerSchema, resetPasswordSchema } from '@/lib/validation'
+import type { AuthSession, WechatQrState, WechatQrTicket } from '@tradeez/shared'
+import { loginSchema, registerSchema, resetPasswordSchema } from '@tradeez/shared'
 import {
   RESET_TTL_MS,
   SESSION_TTL_MS,

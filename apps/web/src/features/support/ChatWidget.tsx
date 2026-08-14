@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ChevronDown, Headset, Loader2, MessageCircle, Send, X } from 'lucide-react'
 import { useEscalate, useSendMessage, useStartChat } from '@/api/support'
 import { cn } from '@/lib/utils'
-import type { ChatSession } from '@/types/auth'
+import type { ChatSession } from '@tradeez/shared'
 
 /**
  * 在线询问挂件。F-19-07

@@ -4,7 +4,7 @@ import { CheckCircle2, Loader2, TriangleAlert } from 'lucide-react'
 import { useResetPassword, useVerifyResetToken } from '@/api/auth'
 import { Button } from '@/components/ui/Button'
 import { TextField } from '@/components/ui/TextField'
-import { fieldErrors, resetPasswordSchema } from '@/lib/validation'
+import { fieldErrors, resetPasswordSchema } from '@tradeez/shared'
 import { AuthCard } from './AuthLayout'
 
 /** 设置新密码。F-19-04，入口为邮件中的 /reset-password?token=xxx */

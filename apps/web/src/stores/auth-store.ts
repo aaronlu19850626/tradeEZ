@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { AuthSession, AuthUser } from '@/types/auth'
+import type { AuthSession, AuthUser } from '@tradeez/shared'
 
 /**
  * 登录态。F-19-01

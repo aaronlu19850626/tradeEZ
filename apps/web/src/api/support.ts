@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from './client'
-import type { ChatSession } from '@/types/auth'
+import type { ChatSession } from '@tradeez/shared'
 
 /** 在线询问接口。F-19-07 */
 

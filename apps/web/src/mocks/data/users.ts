@@ -1,4 +1,4 @@
-import type { AuthUser } from '@/types/auth'
+import type { AuthUser } from '@tradeez/shared'
 
 /**
  * mock 用户库。存在内存中，刷新页面即重置（种子账号除外）。
