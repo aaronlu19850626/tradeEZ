@@ -1,8 +1,9 @@
 import { Outlet } from 'react-router-dom'
+import { ChatWidget } from '@/features/support/ChatWidget'
 import { SideNav } from './SideNav'
 import { TopBar } from './TopBar'
 
-/** 应用外壳：顶栏 + 侧栏 + 内容区 */
+/** 应用外壳：顶栏 + 侧栏 + 内容区，右下角挂在线询问 */
 export function AppLayout() {
   return (
     <div className="flex h-full flex-col">
@@ -13,6 +14,7 @@ export function AppLayout() {
           <Outlet />
         </main>
       </div>
+      <ChatWidget />
     </div>
   )
 }

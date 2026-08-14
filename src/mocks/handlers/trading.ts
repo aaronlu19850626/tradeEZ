@@ -1,6 +1,7 @@
-import { http, HttpResponse, delay } from 'msw'
+import { http, HttpResponse } from 'msw'
+import { lag } from '../latency'
 import type { Paged, SummaryMetrics, Trade } from '@/types'
-import { ACCOUNTS, DAILY_STATS, TRADES } from './data/generate'
+import { ACCOUNTS, DAILY_STATS, TRADES } from '../data/generate'
 
 /**
  * MSW handlers：在网络层拦截 /api/*。
@@ -76,20 +77,20 @@ function computeSummary(trades: Trade[]): SummaryMetrics {
   }
 }
 
-export const handlers = [
+export const tradingHandlers = [
   http.get(`${API}/accounts`, async () => {
-    await delay(120)
+    await lag(120)
     return HttpResponse.json(ACCOUNTS)
   }),
 
   http.get(`${API}/metrics/summary`, async ({ request }) => {
-    await delay(200)
+    await lag(200)
     const filtered = applyFilters(new URL(request.url), TRADES)
     return HttpResponse.json(computeSummary(filtered))
   }),
 
   http.get(`${API}/daily-stats`, async ({ request }) => {
-    await delay(180)
+    await lag(180)
     const url = new URL(request.url)
     const filteredTrades = applyFilters(url, TRADES)
     const dates = new Set(filteredTrades.map((t) => (t.closedAt ?? t.openedAt).slice(0, 10)))
@@ -97,7 +98,7 @@ export const handlers = [
   }),
 
   http.get(`${API}/trades`, async ({ request }) => {
-    await delay(220)
+    await lag(220)
     const url = new URL(request.url)
     const page = Number(url.searchParams.get('page') ?? 1)
     const pageSize = Number(url.searchParams.get('pageSize') ?? 50)
@@ -121,7 +122,7 @@ export const handlers = [
   }),
 
   http.get(`${API}/trades/:id`, async ({ params }) => {
-    await delay(150)
+    await lag(150)
     const trade = TRADES.find((t) => t.id === params.id)
     if (!trade) return new HttpResponse('交易不存在', { status: 404 })
     return HttpResponse.json(trade)

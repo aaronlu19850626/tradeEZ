@@ -3,6 +3,8 @@
  * mock 阶段由 MSW 在 Service Worker 层拦截；后端就绪后关掉 MSW 即可，本文件无需改动。
  */
 
+import { getAuthToken } from '@/stores/auth-store'
+
 const BASE = import.meta.env.VITE_API_BASE ?? '/api'
 
 export class ApiError extends Error {
@@ -15,15 +17,37 @@ export class ApiError extends Error {
   }
 }
 
+/** 401 时清理本地会话，由路由守卫接管跳转，避免各调用点自行处理 */
+let onUnauthorized: (() => void) | null = null
+export function setUnauthorizedHandler(fn: () => void) {
+  onUnauthorized = fn
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const token = getAuthToken()
   const res = await fetch(`${BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...init?.headers },
     ...init,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...init?.headers,
+    },
   })
+
   if (!res.ok) {
-    const text = await res.text().catch(() => '')
-    throw new ApiError(res.status, text || `请求失败：${res.status}`)
+    // 后端返回 { message } 时优先取它，否则退回原始文本
+    const raw = await res.text().catch(() => '')
+    let message = raw
+    try {
+      const parsed = JSON.parse(raw) as { message?: string }
+      if (parsed.message) message = parsed.message
+    } catch {
+      // 非 JSON 响应，保持原始文本
+    }
+    if (res.status === 401) onUnauthorized?.()
+    throw new ApiError(res.status, message || `请求失败：${res.status}`)
   }
+
   if (res.status === 204) return undefined as T
   return res.json() as Promise<T>
 }
