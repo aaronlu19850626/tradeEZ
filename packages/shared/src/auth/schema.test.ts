@@ -5,7 +5,7 @@ import {
   passwordSchema,
   registerSchema,
   resetPasswordSchema,
-} from './schema'
+} from './schema.js'
 
 describe('表单校验规则（F-19-02）', () => {
   it('邮箱格式错误给出中文提示', () => {

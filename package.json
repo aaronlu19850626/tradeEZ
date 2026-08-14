@@ -7,8 +7,10 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev": "pnpm --filter @tradeez/web dev",
-    "dev:api": "pnpm --filter @tradeez/api dev",
+    "// dev": "shared 需先构建：其 exports 指向 dist，Node 与 Vite 都从那里解析",
+    "dev": "pnpm --filter @tradeez/shared build && pnpm --filter @tradeez/web dev",
+    "dev:api": "pnpm --filter @tradeez/shared build && pnpm --filter @tradeez/api dev",
+    "dev:shared": "pnpm --filter @tradeez/shared dev",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "lint": "pnpm -r lint",

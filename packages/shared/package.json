@@ -3,12 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./auth": "./src/auth/index.ts",
-    "./trading": "./src/trading/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./auth": {
+      "types": "./dist/auth/index.d.ts",
+      "import": "./dist/auth/index.js"
+    },
+    "./trading": {
+      "types": "./dist/trading/index.d.ts",
+      "import": "./dist/trading/index.js"
+    }
   },
+  "files": ["dist"],
   "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
     "typecheck": "tsc -b",
     "test": "vitest run",
     "lint": "oxlint"
