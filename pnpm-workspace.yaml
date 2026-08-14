@@ -1,6 +1,10 @@
 packages:
   - 'apps/*'
   - 'packages/*'
-# msw 的 postinstall 会校验 public/mockServiceWorker.js 与包版本是否一致，需放行
+
+# 放行必要的 postinstall：
+# msw 校验 public/mockServiceWorker.js 与包版本一致性
+# esbuild 下载对应平台的二进制
 allowBuilds:
   msw: true
+  esbuild: true
