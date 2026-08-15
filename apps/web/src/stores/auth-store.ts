@@ -12,6 +12,7 @@ import type { AuthSession, AuthUser } from '@tradeez/shared'
 interface AuthState {
   token: string | null
   expiresAt: number | null
+  refreshToken: string | null
   user: AuthUser | null
   setSession: (s: AuthSession) => void
   updateUser: (patch: Partial<AuthUser>) => void
@@ -23,11 +24,13 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       token: null,
       expiresAt: null,
+      refreshToken: null,
       user: null,
-      setSession: ({ token, expiresAt, user }) => set({ token, expiresAt, user }),
+      setSession: ({ token, expiresAt, user, refreshToken }) =>
+        set({ token, expiresAt, user, refreshToken: refreshToken ?? null }),
       updateUser: (patch) =>
         set((s) => (s.user ? { user: { ...s.user, ...patch } } : {})),
-      clear: () => set({ token: null, expiresAt: null, user: null }),
+      clear: () => set({ token: null, expiresAt: null, refreshToken: null, user: null }),
     }),
     { name: 'tradeez.auth' },
   ),

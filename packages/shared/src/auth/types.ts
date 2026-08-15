@@ -14,10 +14,16 @@ export interface AuthUser {
 export type AuthProvider = 'password' | 'wechat'
 
 export interface AuthSession {
+  /** access token，随请求头发送 */
   token: string
   /** 过期时间戳（毫秒），前端据此判断是否需要重新登录 */
   expiresAt: number
   user: AuthUser
+  /**
+   * refresh token。access token 过期后用它换新的一对。
+   * 后端返回，mock 阶段不产出，故可选。
+   */
+  refreshToken?: string
 }
 
 /** 微信扫码状态机。F-19-05 */
