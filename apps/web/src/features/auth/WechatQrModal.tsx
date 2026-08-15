@@ -54,25 +54,25 @@ export function WechatQrModal({
         role="dialog"
         aria-modal="true"
         aria-label="微信扫码登录"
-        className="relative w-full max-w-sm rounded-xl bg-white p-7 shadow-xl"
+        className="relative w-full max-w-sm rounded-xl bg-card p-7 shadow-xl"
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="关闭"
-          className="absolute top-4 right-4 rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+          className="absolute top-4 right-4 rounded-md p-1 text-fg-subtle hover:bg-raised hover:text-fg-muted"
         >
           <X className="size-4" />
         </button>
 
-        <h2 className="mb-1 text-center text-base font-semibold text-slate-900">
+        <h2 className="mb-1 text-center text-base font-semibold text-fg">
           微信扫码登录
         </h2>
-        <p className="mb-5 text-center text-xs text-slate-500">
+        <p className="mb-5 text-center text-xs text-fg-subtle">
           请使用微信扫描二维码，并在手机上确认
         </p>
 
-        <div className="relative mx-auto grid size-48 place-items-center rounded-lg border border-slate-200 bg-white">
+        <div className="relative mx-auto grid size-48 place-items-center rounded-lg border border-line bg-card">
           {loading ? (
             <Loader2 className="size-6 animate-spin text-slate-300" />
           ) : (
@@ -104,13 +104,13 @@ export function WechatQrModal({
 
         <div className="mt-5 text-center">
           {status === 'pending' && (
-            <p className="flex items-center justify-center gap-1.5 text-sm text-slate-500">
+            <p className="flex items-center justify-center gap-1.5 text-sm text-fg-subtle">
               <Loader2 className="size-3.5 animate-spin" />
               等待扫码…
             </p>
           )}
           {status === 'scanned' && (
-            <p className="text-sm text-slate-700">
+            <p className="text-sm text-fg-muted">
               {statusQuery.data?.nickname} 已扫码，请在手机上确认
             </p>
           )}

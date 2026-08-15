@@ -1,19 +1,25 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-/** UI 偏好。F-1-04：侧栏折叠状态记入用户偏好 */
+/**
+ * UI 偏好。F-1-04
+ *
+ * 侧栏有两个正交的维度：
+ * - sidebarHidden：左上角汉堡键控制，隐藏的是整条侧栏（不是退化成图标条）
+ * - 展开还是仅图标：由当前路由决定，不存状态 —— 首页展开带文字，其他页仅图标
+ */
 interface UIState {
-  sidebarCollapsed: boolean
+  sidebarHidden: boolean
   toggleSidebar: () => void
-  setSidebarCollapsed: (v: boolean) => void
+  setSidebarHidden: (v: boolean) => void
 }
 
 export const useUIStore = create<UIState>()(
   persist(
     (set) => ({
-      sidebarCollapsed: false,
-      toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
-      setSidebarCollapsed: (sidebarCollapsed) => set({ sidebarCollapsed }),
+      sidebarHidden: false,
+      toggleSidebar: () => set((s) => ({ sidebarHidden: !s.sidebarHidden })),
+      setSidebarHidden: (sidebarHidden) => set({ sidebarHidden }),
     }),
     { name: 'tradeez.ui' },
   ),

@@ -57,9 +57,9 @@ export default function RegisterPage() {
       <WechatButton onSuccess={() => navigate('/journal/dashboard', { replace: true })} />
 
       <div className="my-5 flex items-center gap-3">
-        <span className="h-px flex-1 bg-slate-200" />
-        <span className="text-xs text-slate-400">或者</span>
-        <span className="h-px flex-1 bg-slate-200" />
+        <span className="h-px flex-1 bg-line" />
+        <span className="text-xs text-fg-subtle">或者</span>
+        <span className="h-px flex-1 bg-line" />
       </div>
 
       <form onSubmit={onSubmit} noValidate className="space-y-4">
@@ -86,12 +86,12 @@ export default function RegisterPage() {
           error={errors.confirmPassword}
         />
 
-        <label className="flex cursor-pointer items-start gap-2 text-xs text-slate-600">
+        <label className="flex cursor-pointer items-start gap-2 text-xs text-fg-muted">
           <input
             type="checkbox"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-0.5 size-3.5 rounded border-slate-300 accent-brand-500"
+            className="mt-0.5 size-3.5 rounded border-line accent-brand-500"
           />
           <span>
             我已阅读并同意

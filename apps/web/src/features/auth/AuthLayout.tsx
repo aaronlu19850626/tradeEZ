@@ -1,13 +1,17 @@
 import { Outlet } from 'react-router-dom'
+import { Logo } from '@/components/brand/Logo'
 import { ChatWidget } from '@/features/support/ChatWidget'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 /**
  * 认证页外壳。F-19-01
  * 对齐截图：浅色底 + 左上/右下淡紫渐晕，卡片居中，右下角挂在线询问入口。
  */
 export function AuthLayout() {
+  useDocumentTitle()
+
   return (
-    <div className="relative flex min-h-full items-center justify-center overflow-hidden bg-white px-4 py-10">
+    <div className="relative flex min-h-full items-center justify-center overflow-hidden bg-card px-4 py-10">
       {/* 渐晕背景 */}
       <div
         aria-hidden
@@ -40,16 +44,15 @@ export function AuthCard({
   footer?: React.ReactNode
 }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
+    <div className="rounded-xl border border-line bg-card p-8 shadow-sm">
       <div className="mb-6 text-center">
-        <div className="mx-auto mb-3 grid size-12 place-items-center rounded-xl bg-brand-500 text-lg font-bold text-white">
-          EZ
-        </div>
-        <h1 className="text-2xl font-semibold text-slate-900">{title}</h1>
-        {subtitle && <p className="mt-2 text-sm text-slate-500">{subtitle}</p>}
+        {/* tone="auto"：trade 走 text-fg，浅色卡片上是深色、深色卡片上转白 */}
+        <Logo tone="auto" size="lg" className="mb-5 flex justify-center" />
+        <h1 className="text-2xl font-semibold text-fg">{title}</h1>
+        {subtitle && <p className="mt-2 text-sm text-fg-subtle">{subtitle}</p>}
       </div>
       {children}
-      {footer && <div className="mt-6 text-center text-sm text-slate-500">{footer}</div>}
+      {footer && <div className="mt-6 text-center text-sm text-fg-subtle">{footer}</div>}
     </div>
   )
 }

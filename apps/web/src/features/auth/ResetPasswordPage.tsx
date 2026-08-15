@@ -43,7 +43,7 @@ export default function ResetPasswordPage() {
           <span className="grid size-12 place-items-center rounded-full bg-loss-soft text-loss">
             <TriangleAlert className="size-6" />
           </span>
-          <p className="text-sm text-slate-600">请重新申请一封重置邮件。</p>
+          <p className="text-sm text-fg-muted">请重新申请一封重置邮件。</p>
           <Button onClick={() => navigate('/forgot-password')}>重新申请</Button>
         </div>
       </AuthCard>
@@ -67,7 +67,7 @@ export default function ResetPasswordPage() {
           <span className="grid size-12 place-items-center rounded-full bg-profit-soft text-profit">
             <CheckCircle2 className="size-6" />
           </span>
-          <p className="text-sm text-slate-600">出于安全考虑，其他设备上的登录已同时失效。</p>
+          <p className="text-sm text-fg-muted">出于安全考虑，其他设备上的登录已同时失效。</p>
           <Button onClick={() => navigate('/login', { replace: true })}>前往登录</Button>
         </div>
       </AuthCard>

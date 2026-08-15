@@ -1,30 +1,150 @@
 @import 'tailwindcss';
 
-/* 设计令牌：对齐截图配色。深色顶栏/侧栏 + 浅灰页面底 + 白卡 */
-@theme {
-  --color-brand-50: #f3f1ff;
-  --color-brand-100: #ebe5ff;
-  --color-brand-200: #d9ceff;
-  --color-brand-300: #bea6ff;
-  --color-brand-400: #9f75ff;
-  --color-brand-500: #843dff;
-  --color-brand-600: #7916ff;
-  --color-brand-700: #6b04fd;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  /* 顶栏与侧栏的深紫底 */
-  --color-shell-900: #1b1130;
-  --color-shell-800: #241640;
-  --color-shell-700: #2f1d54;
+/**
+ * 主题令牌。组件只使用语义名（bg-card / text-fg / border-line ...），
+ * 明暗两套各给一组值，避免逐个组件写 dark: 变体导致漏改。
+ */
+:root {
+  /* 面 */
+  --ui-page: #f7f7f9;
+  --ui-card: #ffffff;
+  --ui-raised: #f1f2f5;
+  --ui-line: #e3e5ea;
 
-  /* 盈亏语义色，全站统一 */
-  --color-profit: #16a34a;
-  --color-profit-soft: #dcfce7;
-  --color-loss: #dc2626;
-  --color-loss-soft: #fee2e2;
-  --color-flat: #94a3b8;
+  /* 字 */
+  --ui-fg: #16181d;
+  --ui-fg-muted: #4a4f5a;
+  --ui-fg-subtle: #8a909c;
 
-  --font-sans: 'Inter', system-ui, -apple-system, 'PingFang SC',
-    'Microsoft YaHei', sans-serif;
+  /* 外壳：顶栏与产品级导航条，明暗都是深色，但深色主题更黑 */
+  --ui-shell-900: #1a0e2e;
+  --ui-shell-hover: #2e1c4d;
+  --ui-shell-active: #3a2560;
+
+  /* 二级菜单选中/悬停态 */
+  --ui-nav-active: #efedfb;
+  --ui-nav-active-fg: #4b39a8;
+  --ui-nav-hover: #f2f0fc;
+
+  /* 品牌 */
+  --ui-brand-50: #efedfb;
+  --ui-brand-200: #cfc7f5;
+  --ui-brand-300: #b3a7ee;
+  --ui-brand-500: #6d55d4;
+  --ui-brand-600: #5e46c4;
+  --ui-brand-700: #4b39a8;
+
+  /* 盈亏 */
+  --ui-profit: #16a34a;
+  --ui-loss: #e5484d;
+  --ui-profit-soft: #e8f7ee;
+  --ui-loss-soft: #fdecec;
+
+  --ui-scroll: #cfd2d9;
+}
+
+.dark {
+  --ui-page: #0e0e12;
+  --ui-card: #17171d;
+  --ui-raised: #212128;
+  --ui-line: #2a2a33;
+
+  --ui-fg: #eceef3;
+  --ui-fg-muted: #b3b8c4;
+  --ui-fg-subtle: #7d8391;
+
+  /*
+   * 外壳（顶栏 + 产品级导航条）比页面底色略浅，
+   * 让顶栏与左栏从内容区里浮出来 —— 若比页面更深会糊成一片。
+   */
+  --ui-shell-900: #1a1a21;
+  --ui-shell-hover: #26262f;
+  --ui-shell-active: #33323f;
+
+  --ui-nav-active: #2a2140;
+  --ui-nav-active-fg: #c4b5fd;
+  --ui-nav-hover: #221b34;
+
+  --ui-brand-50: #241d38;
+  --ui-brand-200: #4b3d7a;
+  --ui-brand-300: #6250a0;
+  --ui-brand-500: #7c62e8;
+  --ui-brand-600: #6b51d8;
+  --ui-brand-700: #c4b5fd;
+
+  --ui-profit: #3fb950;
+  --ui-loss: #f0575c;
+  --ui-profit-soft: #16281d;
+  --ui-loss-soft: #2e1a1c;
+
+  --ui-scroll: #3a3e4a;
+}
+
+@theme inline {
+  --color-page: var(--ui-page);
+  --color-card: var(--ui-card);
+  --color-raised: var(--ui-raised);
+  --color-line: var(--ui-line);
+
+  --color-fg: var(--ui-fg);
+  --color-fg-muted: var(--ui-fg-muted);
+  --color-fg-subtle: var(--ui-fg-subtle);
+
+  --color-shell-900: var(--ui-shell-900);
+  --color-shell-hover: var(--ui-shell-hover);
+  --color-shell-active: var(--ui-shell-active);
+
+  --color-nav-active: var(--ui-nav-active);
+  --color-nav-active-fg: var(--ui-nav-active-fg);
+  --color-nav-hover: var(--ui-nav-hover);
+
+  --color-brand-50: var(--ui-brand-50);
+  --color-brand-200: var(--ui-brand-200);
+  --color-brand-300: var(--ui-brand-300);
+  --color-brand-500: var(--ui-brand-500);
+  --color-brand-600: var(--ui-brand-600);
+  --color-brand-700: var(--ui-brand-700);
+
+  --color-profit: var(--ui-profit);
+  --color-loss: var(--ui-loss);
+  --color-profit-soft: var(--ui-profit-soft);
+  --color-loss-soft: var(--ui-loss-soft);
+
+  /*
+   * 品牌字标专用衬线体。设计稿是细笔画、高字身的现代衬线，
+   * Didot / Bodoni 这类最接近；Georgia 笔画太粗、字身太矮，放在末位兜底。
+   */
+  --font-serif: 'Didot', 'Bodoni MT', 'Playfair Display', 'Times New Roman',
+    Georgia, serif;
+
+  --animate-flyout: flyout 140ms ease-out;
+  --animate-ripple: ripple 550ms ease-out forwards;
+}
+
+/* 点击涟漪：从落点向外扩散并淡出。缺了这段动画，
+   涟漪元素的 onAnimationEnd 不会触发，圆圈会永久留在按钮上 */
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes flyout {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 html,
@@ -34,21 +154,11 @@ body,
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
-  font-family: var(--font-sans);
+  background-color: var(--ui-page);
+  color: var(--ui-fg);
 }
 
-/* 细滚动条，避免侧栏与表格出现粗滚动条破坏版式 */
-@layer utilities {
-  .scrollbar-thin {
-    scrollbar-width: thin;
-    scrollbar-color: theme(--color-slate-300) transparent;
-  }
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-slate-300;
-  }
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-scroll) transparent;
 }

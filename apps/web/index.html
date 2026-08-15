@@ -4,7 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TradeEZ · 交易复盘平台</title>
+    <title>tradeEZ · 交易复盘平台</title>
+    <script>
+      // 在首次绘制前落定主题，避免深色偏好下先闪一帧浅色。
+      // 与 stores/theme-store.ts 的 persist key 保持一致。
+      try {
+        var s = localStorage.getItem('tradeez.theme')
+        var t = s ? JSON.parse(s).state.theme : null
+        if (!t) {
+          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.classList.toggle('dark', t === 'dark')
+        document.documentElement.style.colorScheme = t
+      } catch (e) {
+        /* localStorage 不可用时按浅色渲染 */
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

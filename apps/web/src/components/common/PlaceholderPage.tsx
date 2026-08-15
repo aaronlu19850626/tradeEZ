@@ -1,48 +1,59 @@
 import { Construction } from 'lucide-react'
 import { FilterBar } from '@/components/layout/FilterBar'
-import { PageHeader } from './PageHeader'
+import { useT } from '@/i18n/useT'
+import type { NavLabelKey, NoteKey } from '@/i18n/locales'
 
-interface Props {
-  title: string
+/**
+ * 占位页。列出该页待实现的需求条目，便于对照需求文档。
+ * 页面真正实现后从 pages/placeholders.tsx 移出。
+ */
+export function PlaceholderPage({
+  titleKey,
+  reqId,
+  noteKey,
+  showFilterBar,
+}: {
+  titleKey: NavLabelKey
   reqId: string
-  /** 该页待实现的要点，取自需求文档 */
-  notes?: string[]
+  noteKey: NoteKey
   showFilterBar?: boolean
-}
+}) {
+  const t = useT()
 
-/** 页面占位。骨架阶段所有页面用它，逐页替换为真实实现 */
-export function PlaceholderPage({ title, reqId, notes, showFilterBar }: Props) {
   return (
-    <>
-      <PageHeader
-        title={title}
-        reqId={reqId}
-        actions={showFilterBar ? <FilterBar /> : undefined}
-      />
-      <div className="px-6 pb-8">
-        <div className="rounded-xl border border-dashed border-slate-300 bg-white p-10">
-          <div className="flex flex-col items-center gap-3 text-center">
-            <span className="grid size-11 place-items-center rounded-full bg-brand-50 text-brand-600">
+    <div className="flex h-full flex-col">
+      <div className="flex flex-wrap items-center gap-3 px-6 pt-5">
+        <h1 className="text-xl font-semibold text-fg">{t.nav[titleKey]}</h1>
+        <span className="rounded border border-line px-1.5 py-0.5 text-xs text-fg-subtle">
+          {reqId}
+        </span>
+        {showFilterBar && (
+          <div className="ml-auto">
+            <FilterBar />
+          </div>
+        )}
+      </div>
+
+      <div className="flex-1 px-6 py-5">
+        <div className="rounded-2xl border border-dashed border-line px-6 py-14">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="mx-auto grid size-12 place-items-center rounded-xl bg-brand-50 text-brand-700">
               <Construction className="size-5" />
             </span>
-            <p className="text-sm font-medium text-slate-700">此页面待实现</p>
-            <p className="max-w-md text-xs text-slate-500">
-              骨架已就绪：布局、路由、全局筛选器与模拟接口均可用。确认结构后逐页填充内容。
-            </p>
-          </div>
+            <p className="mt-4 font-medium text-fg">{t.common.pageTodoTitle}</p>
+            <p className="mt-2 text-sm text-fg-subtle">{t.common.pageTodoDesc}</p>
 
-          {notes?.length ? (
-            <ul className="mx-auto mt-8 max-w-lg space-y-1.5 border-t border-slate-100 pt-6">
-              {notes.map((n) => (
-                <li key={n} className="flex gap-2 text-xs text-slate-500">
-                  <span className="text-slate-300">·</span>
-                  {n}
+            <ul className="mt-6 space-y-1.5 border-t border-line pt-6 text-left text-sm text-fg-muted">
+              {t.notes[noteKey].map((note) => (
+                <li key={note} className="flex gap-2">
+                  <span className="text-fg-subtle">·</span>
+                  {note}
                 </li>
               ))}
             </ul>
-          ) : null}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

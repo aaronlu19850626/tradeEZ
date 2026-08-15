@@ -11,7 +11,7 @@ interface StoredUser extends AuthUser {
   wechatOpenId?: string
 }
 
-export const SEED_ACCOUNT = { email: 'demo@tradeez.com', password: 'tradeez2026' }
+export const SEED_ACCOUNT = { email: 'demo@tradeEZ.cn', password: 'abcd1234' }
 
 export const users = new Map<string, StoredUser>()
 

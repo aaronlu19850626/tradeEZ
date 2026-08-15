@@ -19,7 +19,7 @@ export function TextField({ label, error, type = 'text', className, id, ...rest 
   return (
     <div className={className}>
       {label && (
-        <label htmlFor={fieldId} className="mb-1.5 block text-sm text-slate-700">
+        <label htmlFor={fieldId} className="mb-1.5 block text-sm text-fg-muted">
           {label}
         </label>
       )}
@@ -31,13 +31,13 @@ export function TextField({ label, error, type = 'text', className, id, ...rest 
           aria-invalid={Boolean(error)}
           aria-describedby={error ? `${fieldId}-error` : undefined}
           className={cn(
-            'w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none',
-            'placeholder:text-slate-400',
+            'w-full rounded-lg border bg-card px-3.5 py-2.5 text-sm text-fg outline-none',
+            'placeholder:text-fg-subtle',
             'focus:ring-2 focus:ring-brand-100',
             isPassword && 'pr-10',
             error
               ? 'border-loss focus:border-loss focus:ring-loss/15'
-              : 'border-slate-300 focus:border-brand-400',
+              : 'border-line focus:border-brand-400',
           )}
         />
         {isPassword && (
@@ -45,7 +45,7 @@ export function TextField({ label, error, type = 'text', className, id, ...rest 
             type="button"
             onClick={() => setRevealed((v) => !v)}
             aria-label={revealed ? '隐藏密码' : '显示密码'}
-            className="absolute top-1/2 right-3 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+            className="absolute top-1/2 right-3 -translate-y-1/2 text-fg-subtle hover:text-fg-muted"
           >
             {revealed ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
           </button>

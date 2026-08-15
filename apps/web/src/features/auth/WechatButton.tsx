@@ -10,7 +10,7 @@ export function WechatButton({ onSuccess }: { onSuccess: () => void }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-slate-300 bg-white py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+        className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-line bg-card py-3 text-sm font-medium text-fg-muted transition-colors hover:bg-page"
       >
         <WechatIcon className="size-5" />
         使用微信登录

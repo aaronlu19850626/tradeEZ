@@ -10,16 +10,16 @@ export function MockHealthCheck() {
 
   return (
     <div className="px-6 pb-10">
-      <div className="rounded-xl border border-slate-200 bg-white p-5">
+      <div className="rounded-xl border border-line bg-card p-5">
         <div className="mb-3 flex items-center gap-2">
           <span className="size-2 rounded-full bg-profit" />
-          <h2 className="text-sm font-semibold text-slate-800">骨架自检</h2>
-          <span className="text-xs text-slate-400">
+          <h2 className="text-sm font-semibold text-fg">骨架自检</h2>
+          <span className="text-xs text-fg-subtle">
             链路：TanStack Query → fetch(/api/metrics/summary) → MSW → 模拟数据
           </span>
         </div>
 
-        {isLoading && <p className="text-sm text-slate-500">加载中…</p>}
+        {isLoading && <p className="text-sm text-fg-subtle">加载中…</p>}
         {error && <p className="text-sm text-loss">请求失败：{String(error)}</p>}
 
         {data && (
@@ -32,7 +32,7 @@ export function MockHealthCheck() {
               <Metric label="盈亏比" value={data.profitFactor.toFixed(2)} />
               <Metric label="平均盈亏比" value={data.avgWinLossRatio.toFixed(2)} />
             </div>
-            <p className="mt-4 border-t border-slate-100 pt-3 text-xs text-slate-500">
+            <p className="mt-4 border-t border-line pt-3 text-xs text-fg-subtle">
               盈 {data.winners} / 平 {data.breakeven} / 亏 {data.losers}｜平均盈利{' '}
               {formatMoney(data.avgWin)}｜平均亏损 {formatMoney(data.avgLoss)}
               　切换上方筛选器可观察数据联动。
@@ -47,8 +47,8 @@ export function MockHealthCheck() {
 function Metric({ label, value, color }: { label: string; value: string; color?: string }) {
   return (
     <div>
-      <p className="text-xs text-slate-500">{label}</p>
-      <p className={`mt-0.5 text-lg font-semibold ${color ?? 'text-slate-900'}`}>{value}</p>
+      <p className="text-xs text-fg-subtle">{label}</p>
+      <p className={`mt-0.5 text-lg font-semibold ${color ?? 'text-fg'}`}>{value}</p>
     </div>
   )
 }

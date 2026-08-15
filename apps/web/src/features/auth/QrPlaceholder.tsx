@@ -21,7 +21,7 @@ export function QrPlaceholder({ payload }: { payload: string }) {
         ))}
       </div>
       {/* 中心微信绿标，遮住中间区域使其更像真实二维码 */}
-      <span className="absolute top-1/2 left-1/2 grid size-9 -translate-x-1/2 -translate-y-1/2 place-items-center rounded bg-white">
+      <span className="absolute top-1/2 left-1/2 grid size-9 -translate-x-1/2 -translate-y-1/2 place-items-center rounded bg-card">
         <span className="grid size-7 place-items-center rounded bg-[#07C160] text-[10px] font-bold text-white">
           微信
         </span>

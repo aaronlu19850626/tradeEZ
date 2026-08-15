@@ -4,7 +4,7 @@ import { useLogin } from '@/api/auth'
 import { Button } from '@/components/ui/Button'
 import { TextField } from '@/components/ui/TextField'
 import { fieldErrors, loginSchema } from '@tradeez/shared'
-import { SEED_HINT } from './constants'
+import { SEED_ACCOUNT, SEED_HINT } from './constants'
 import { AuthCard } from './AuthLayout'
 import { WechatButton } from './WechatButton'
 
@@ -58,9 +58,9 @@ export default function LoginPage() {
       <WechatButton onSuccess={() => navigate(redirectTo, { replace: true })} />
 
       <div className="my-5 flex items-center gap-3">
-        <span className="h-px flex-1 bg-slate-200" />
-        <span className="text-xs text-slate-400">或者</span>
-        <span className="h-px flex-1 bg-slate-200" />
+        <span className="h-px flex-1 bg-line" />
+        <span className="text-xs text-fg-subtle">或者</span>
+        <span className="h-px flex-1 bg-line" />
       </div>
 
       <form onSubmit={onSubmit} noValidate className="space-y-4">
@@ -70,7 +70,7 @@ export default function LoginPage() {
           placeholder="电子邮件地址"
           autoComplete="email"
           error={errors.email}
-          defaultValue=""
+          defaultValue={SEED_ACCOUNT.email}
         />
         <div>
           <TextField
@@ -79,6 +79,7 @@ export default function LoginPage() {
             placeholder="密码"
             autoComplete="current-password"
             error={errors.password}
+            defaultValue={SEED_ACCOUNT.password}
           />
           <Link
             to="/forgot-password"
@@ -99,7 +100,7 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      <p className="mt-5 rounded-lg bg-slate-50 px-3 py-2 text-center text-xs text-slate-500">
+      <p className="mt-5 rounded-lg bg-page px-3 py-2 text-center text-xs text-fg-subtle">
         {SEED_HINT}
       </p>
     </AuthCard>

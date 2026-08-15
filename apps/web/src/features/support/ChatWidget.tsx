@@ -52,15 +52,15 @@ export function ChatWidget() {
   }
 
   return (
-    <div className="fixed right-6 bottom-6 z-40 flex h-[32rem] w-[22rem] flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl">
+    <div className="fixed right-6 bottom-6 z-40 flex h-[32rem] w-[22rem] flex-col overflow-hidden rounded-xl border border-line bg-card shadow-2xl">
       {/* 头部 */}
-      <div className="flex items-center gap-2.5 border-b border-slate-100 px-4 py-3">
+      <div className="flex items-center gap-2.5 border-b border-line px-4 py-3">
         <span className="grid size-8 place-items-center rounded-full bg-brand-100 text-brand-600">
           <Headset className="size-4" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-slate-900">TradeEZ 支持</p>
-          <p className="text-[11px] text-slate-500">
+          <p className="truncate text-sm font-semibold text-fg">TradeEZ 支持</p>
+          <p className="text-[11px] text-fg-subtle">
             {session?.escalated ? '已转人工客服' : '通常几分钟内回复'}
           </p>
         </div>
@@ -68,7 +68,7 @@ export function ChatWidget() {
           type="button"
           onClick={() => setOpen(false)}
           aria-label="收起"
-          className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+          className="rounded-md p-1 text-fg-subtle hover:bg-raised hover:text-fg-muted"
         >
           <ChevronDown className="size-4" />
         </button>
@@ -79,7 +79,7 @@ export function ChatWidget() {
             setSession(null)
           }}
           aria-label="结束会话"
-          className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+          className="rounded-md p-1 text-fg-subtle hover:bg-raised hover:text-fg-muted"
         >
           <X className="size-4" />
         </button>
@@ -87,7 +87,7 @@ export function ChatWidget() {
 
       {/* 消息区 */}
       <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4 scrollbar-thin">
-        <p className="text-center text-xs text-slate-400">有任何问题都可以问我们，或者留下反馈。</p>
+        <p className="text-center text-xs text-fg-subtle">有任何问题都可以问我们，或者留下反馈。</p>
 
         {start.isPending && (
           <div className="grid place-items-center py-6">
@@ -103,13 +103,13 @@ export function ChatWidget() {
                   'rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap',
                   m.role === 'user'
                     ? 'rounded-br-sm bg-brand-500 text-white'
-                    : 'rounded-bl-sm bg-slate-100 text-slate-700',
+                    : 'rounded-bl-sm bg-raised text-fg-muted',
                 )}
               >
                 {m.content}
               </div>
               {m.authorLabel && (
-                <p className="mt-1 text-[10px] text-slate-400">{m.authorLabel}</p>
+                <p className="mt-1 text-[10px] text-fg-subtle">{m.authorLabel}</p>
               )}
             </div>
           </div>
@@ -117,7 +117,7 @@ export function ChatWidget() {
 
         {send.isPending && (
           <div className="flex justify-start">
-            <div className="flex gap-1 rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-3">
+            <div className="flex gap-1 rounded-2xl rounded-bl-sm bg-raised px-3.5 py-3">
               {[0, 150, 300].map((d) => (
                 <span
                   key={d}
@@ -144,8 +144,8 @@ export function ChatWidget() {
       </div>
 
       {/* 输入区 */}
-      <form onSubmit={onSend} className="border-t border-slate-100 p-3">
-        <div className="flex items-end gap-2 rounded-lg border border-slate-200 px-3 py-2 focus-within:border-brand-400">
+      <form onSubmit={onSend} className="border-t border-line p-3">
+        <div className="flex items-end gap-2 rounded-lg border border-line px-3 py-2 focus-within:border-brand-400">
           <textarea
             name="content"
             rows={1}
@@ -157,7 +157,7 @@ export function ChatWidget() {
                 e.currentTarget.form?.requestSubmit()
               }
             }}
-            className="max-h-24 flex-1 resize-none bg-transparent text-[13px] text-slate-800 outline-none placeholder:text-slate-400"
+            className="max-h-24 flex-1 resize-none bg-transparent text-[13px] text-fg outline-none placeholder:text-fg-subtle"
           />
           <button
             type="submit"

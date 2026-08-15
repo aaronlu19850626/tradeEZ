@@ -33,7 +33,7 @@ export default function ForgotPasswordPage() {
           <span className="grid size-12 place-items-center rounded-full bg-profit-soft text-profit">
             <MailCheck className="size-6" />
           </span>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-fg-muted">
             点击邮件中的链接即可设置新密码，链接 30 分钟内有效。
             <br />
             没收到？请检查垃圾邮件夹。
@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
             换个邮箱重试
           </Button>
           {/* mock 阶段无真实邮件，链接打在控制台 */}
-          <p className="rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500">
+          <p className="rounded-lg bg-page px-3 py-2 text-xs text-fg-subtle">
             当前为模拟环境，重置链接已打印在浏览器控制台
           </p>
         </div>

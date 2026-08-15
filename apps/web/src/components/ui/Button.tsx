@@ -10,8 +10,8 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const VARIANTS = {
   primary: 'bg-brand-500 text-white hover:bg-brand-600 disabled:bg-brand-300',
-  outline: 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
-  ghost: 'text-slate-600 hover:bg-slate-100',
+  outline: 'border border-line bg-card text-fg-muted hover:bg-page',
+  ghost: 'text-fg-muted hover:bg-raised',
 } as const
 
 export function Button({

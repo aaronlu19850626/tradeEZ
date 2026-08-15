@@ -18,25 +18,30 @@ export async function startMockWorker() {
   })
 
   /**
-   * 首次注册 Service Worker 时，当前这次页面加载不受其接管，
-   * 请求会直接走网络（表现为 502）。此时刷新一次即可生效。
-   * 用 sessionStorage 标记确保只刷一次，避免 SW 始终无法接管时无限刷新。
+   * Service Worker 首次注册时不接管当前这次页面加载，请求会直接走网络（表现为 502）。
+   *
+   * 这里等待接管完成而不是刷新页面：之前用「刷新 + sessionStorage 标记」的做法有个坑 ——
+   * 标记一旦留下，后续 SW 未接管时会直接跳过启动，MSW 静默失效，
+   * 症状就是登录一直 502 且看不出原因。
    */
-  const RELOAD_FLAG = 'tradeez.msw.reloaded'
   if (!navigator.serviceWorker.controller) {
-    if (sessionStorage.getItem(RELOAD_FLAG)) {
-      console.error(
-        '[TradeEZ] Service Worker 无法接管页面，接口请求将穿透到网络。' +
-          '请在开发者工具 Application → Service Workers 中注销后重试。',
-      )
-      return
-    }
-    sessionStorage.setItem(RELOAD_FLAG, '1')
-    console.warn('[TradeEZ] Service Worker 刚注册，本次加载未被接管，正在刷新…')
-    location.reload()
+    await new Promise<void>((resolve) => {
+      // controllerchange 在 SW 取得控制权时触发
+      navigator.serviceWorker.addEventListener('controllerchange', () => resolve(), {
+        once: true,
+      })
+      // 兜底：2 秒内没等到就继续，至少让页面渲染出来而不是白屏
+      setTimeout(resolve, 2000)
+    })
+  }
+
+  if (!navigator.serviceWorker.controller) {
+    console.error(
+      '[TradeEZ] Service Worker 未能接管页面，接口请求会穿透到网络（502）。' +
+        '请在开发者工具 Application → Service Workers 中注销后刷新。',
+    )
     return
   }
-  sessionStorage.removeItem(RELOAD_FLAG)
 
   console.info(`[TradeEZ] MSW 已就绪，注册 ${handlers.length} 个 handler，接口走模拟数据`)
 }

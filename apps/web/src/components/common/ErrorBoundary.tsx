@@ -23,13 +23,13 @@ export class ErrorBoundary extends Component<
     if (!error) return this.props.children
 
     return (
-      <div className="grid min-h-full place-items-center bg-slate-50 p-8">
-        <div className="max-w-md rounded-xl border border-slate-200 bg-white p-7 text-center">
-          <p className="text-base font-semibold text-slate-900">页面出错了</p>
-          <p className="mt-2 text-sm text-slate-500">
+      <div className="grid min-h-full place-items-center bg-page p-8">
+        <div className="max-w-md rounded-xl border border-line bg-card p-7 text-center">
+          <p className="text-base font-semibold text-fg">页面出错了</p>
+          <p className="mt-2 text-sm text-fg-subtle">
             刷新通常可以恢复。若持续出现，请把下面的信息反馈给我们。
           </p>
-          <pre className="mt-4 max-h-32 overflow-auto rounded-lg bg-slate-50 p-3 text-left text-xs text-loss">
+          <pre className="mt-4 max-h-32 overflow-auto rounded-lg bg-page p-3 text-left text-xs text-loss">
             {error.message}
           </pre>
           <button
